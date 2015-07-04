@@ -18,6 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-	url(r'^$','blog.views.index'),
+	url(r'^$','thirdauth.views.home'),
 	url(r'blog/view/(?P<slug>[^\.]+).html','blog.views.view_post',name='view_blog_post'),	
+
 ]
