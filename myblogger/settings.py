@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'myblogger.wsgi.application'
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
     'social.backends.google.GoogleOAuth2',
-    'socail.backends.twitter.TwitterOAuth',
+    'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
     )
 # Database
@@ -111,3 +111,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_FACEBOOK_KEY = '726344994155061'
+SOCIAL_AUTH_FACEBOOK_SECRET = '80c7989090dc81ff72ed7664aba7ef59'

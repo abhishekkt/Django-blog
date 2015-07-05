@@ -20,7 +20,33 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
  </head>
  <body>
-   {% block main %}{% endblock %}
+   {% block main %}
+      <div>
+      <h1>Third-party authentication</h1>
+      <p>
+      <ul>
+      {%if user and not user.is_anonymous%}
+      <li>
+      <a>Hello{{user.get_full_name|default:user.username}}!</a>
+      </li>
+      <li>
+      <a href= "{% url 'auth:logout' %}?next={{ request.path}}">Logout</a>
+      </li>
+      {% else %}
+      <li>
+      <a href = "{% url 'social:begin' 'facebook' %}?next={{request.path}}">Login with facebook</a>
+      </li>
+      <li>
+      <a href = "{% url 'social:begin' 'google-oauth2' %}?next={{request.path}}">Login with google</a>
+      </li>
+      <li>
+      <a href = "{% url 'social:begin' 'twitter' %}?next={{request.path}}">Login with twitter</a>
+      </li>
+      {% endif %}
+      </ul>
+      </p>
+      </div>
+   {% endblock %}
    
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
    
