@@ -7,9 +7,7 @@
    <title>{% block title %}Third-party Authentication Tutorial{% endblock %}</title>
 
    <!-- Bootstrap -->
-   <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-   <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
-   <link href="/static/css/fbposter.css" rel="stylesheet">
+   
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
@@ -19,37 +17,25 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
  </head>
- <body>
-   {% block main %}
-      <div>
-      <h1>Third-party authentication</h1>
-      <p>
-      <ul>
-      {%if user and not user.is_anonymous%}
-      <li>
-      <a>Hello{{user.get_full_name|default:user.username}}!</a>
-      </li>
-      <li>
-      <a href= "{% url 'auth:logout' %}?next={{ request.path}}">Logout</a>
-      </li>
-      {% else %}
-      <li>
-      <a href = "{% url 'social:begin' 'facebook' %}?next={{request.path}}">Login with facebook</a>
-      </li>
-      <li>
-      <a href = "{% url 'social:begin' 'google-oauth2' %}?next={{request.path}}">Login with google</a>
-      </li>
-      <li>
-      <a href = "{% url 'social:begin' 'twitter' %}?next={{request.path}}">Login with twitter</a>
-      </li>
-      {% endif %}
-      </ul>
-      </p>
-      </div>
-   {% endblock %}
-   
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-   
-   <script src="/static/js/bootstrap.min.js"></script>
- </body>
+<body>
+    <div id="sidebar"> {% block sidebar %} {% endblock %} </div>
+    <div id="container">
+        <div id="menu">
+            {% block nav-global %}
+
+                <!-- MENU -->
+                <h1>MyBlog</h1>
+                
+
+            {% endblock %}
+        </div>
+
+        <div id="content">
+            {% block main %}
+            {% endblock %}
+        </div>
+    </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</body>
+
 </html>
