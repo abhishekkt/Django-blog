@@ -5,17 +5,18 @@
       <h1>Welcome</h1>
       <p>
       <ul>
-      {%if user and not user.is_anonymous%}
+      {%if user and not user.is_anonymous %}
       <h3>
       Hello {{user.get_full_name|default:user.username}} !
       <h3>
       
       <li>
-      <a href= "{% url 'auth:logout' %}?next={{ request.path}}">Logout</a>
+      <a href= "{% url 'auth:logout' %}?next={{ request.path}} ">Logout
+      </a>
       </li>
       {% else %}
       <li>
-      <a href = "{% url 'social:begin' 'facebook' %}?next={{request.path}}">Login with facebook</a>
+      <a href = "{% url 'social:begin' 'facebook' %}?next={{ request.path}} ">Login with facebook</a>
      
       </li>
       
@@ -27,7 +28,7 @@
       {% if blog %}
       
       {% for blog in blog %}
-     <a href="{{blog.get_absolute_url}}"> <h2><div class="title">{{ blog.title }}</div></h2>
+     <a href="{{ blog.get_absolute_url }}"> <h2><div class="title">{{ blog.title }}</div></h2>
       <hr>
       <ul>
             <div class="time">{{ blog.posted_on }}</div>

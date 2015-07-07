@@ -24,3 +24,12 @@ class blog(models.Model):
 	@permalink
 	def get_absolute_url(self):
 		return('view_blog_post', None, {'slug':self.slug})
+
+	
+class comment(models.Model):
+	created = models.DateTimeField(auto_now_add=True)
+	author = models.CharField(max_length = 60)
+	body = models.TextField()
+	post = models.ForeignKey(blog)
+	def __str__(self):
+		return self.body
