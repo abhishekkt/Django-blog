@@ -3,7 +3,7 @@ from blog.models import blogger,blog,comment
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from blog.forms import CommentForm
+from blog.forms import CommentForm,BloggerForm
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -59,13 +59,35 @@ def add_comment(request,id):
 		arg1=(blog.objects.get(uid = id)).slug 
 	return HttpResponseRedirect(reverse("blog.views.view_post",args = [arg1]))
 
+def register(request,uid):
+	p = request.POST
+	use =  request.user
+	social = use.social_auth.get(provider='facebook')
+
+	if p.has_key("username") and p["username"]:
+		bid = uid
+		blgr = blogger(bid=bid,name = str(social.user))
+		blgr_frm = BloggerForm(p, instance = blgr)
+		blgr_frm.save()
+		print "yes saved"
+	return HttpResponseRedirect(reverse("blog.views.welcome"))	
+
+
 def welcome(request):
-	user =  request.user
-	social = user.social_auth.get(provider='facebook')
-	print social.uid
-	print social.user
+	print request
 	if str(request.user) == "AnonymousUser":
 		return HttpResponseRedirect(reverse("blog.views.home"))
 	else:
-		context = RequestContext(request, {'user':request.user})
-		return render_to_response('welcome.html',context)	
+		user =  request.user
+		social = user.social_auth.get(provider='facebook')
+		print social.uid
+		print social.user
+		if blogger.objects.filter(bid=social.uid).exists():
+			ans = True
+		else:
+			ans = False
+		context = RequestContext(request, {'uid':social.uid,'name':social.user,'form':BloggerForm(),'blogger':blogger,'ans':ans})
+		return render_to_response('welcome.html',context)
+			
+
+	

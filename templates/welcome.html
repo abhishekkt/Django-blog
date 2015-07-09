@@ -1,6 +1,14 @@
 
-{%if user and not user.is_anonymous %}
+{%if ans %}
       <h3>
       Hello {{user.get_full_name|default:user.username}} !
       <h3>
+ {% else %}
+ <h3> You need to register in order to write blog </h3>
+ <form method = "POST" action = "{%url 'blog.views.register' uid%}">
+ {% csrf_token %}
+ 	UserName {{form.username}}<br>
+ 	<input type="checkbox">I accept all terms and conditions<br>
+ 	<input type ="submit" value = "submit">
+ </form>
  {% endif %}

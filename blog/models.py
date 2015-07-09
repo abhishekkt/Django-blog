@@ -5,11 +5,10 @@ from django.db.models import permalink
 
 class blogger(models.Model):
 	name = models.CharField(max_length = 200)
-	uid = models.AutoField(primary_key=True)
+	username = models.CharField(max_length = 200, default ="username", unique = True)
+	bid = models.IntegerField( primary_key=True,default = 0)
 	def __str__(self):
 		return self.name
-
-
 
 class blog(models.Model):
 	title = models.CharField(max_length = 200, unique = True)
@@ -24,7 +23,6 @@ class blog(models.Model):
 	@permalink
 	def get_absolute_url(self):
 		return('view_blog_post', None, {'slug':self.slug})
-
 	
 class comment(models.Model):
 	created = models.DateTimeField(auto_now_add=True)

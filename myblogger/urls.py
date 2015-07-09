@@ -23,5 +23,6 @@ urlpatterns = [
     url('',include('social.apps.django_app.urls',namespace = 'social')),
     url('',include('django.contrib.auth.urls',namespace='auth')),
     url(r"/add_comment/(\d+)/$","blog.views.add_comment"),  
-    url(r'^welcome/$','blog.views.welcome') 
+    url(r'^welcome/$','blog.views.welcome'),
+    url(r"/register/(\d+)/$","blog.views.register"),
 ]
