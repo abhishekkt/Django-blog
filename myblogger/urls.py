@@ -22,5 +22,6 @@ urlpatterns = [
 	url(r'blog/view/(?P<slug>[^\.]+).html','blog.views.view_post',name='view_blog_post'),	
     url('',include('social.apps.django_app.urls',namespace = 'social')),
     url('',include('django.contrib.auth.urls',namespace='auth')),
-    url(r"/add_comment/(\d+)/$","blog.views.add_comment"),   
+    url(r"/add_comment/(\d+)/$","blog.views.add_comment"),  
+    url(r'^welcome/$','blog.views.welcome') 
 ]

@@ -7,7 +7,8 @@ from blog.forms import CommentForm
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-
+import urllib2
+import json
 
 
 def index(request):
@@ -57,3 +58,14 @@ def add_comment(request,id):
 		comnt.save()
 		arg1=(blog.objects.get(uid = id)).slug 
 	return HttpResponseRedirect(reverse("blog.views.view_post",args = [arg1]))
+
+def welcome(request):
+	user =  request.user
+	social = user.social_auth.get(provider='facebook')
+	print social.uid
+	print social.user
+	if str(request.user) == "AnonymousUser":
+		return HttpResponseRedirect(reverse("blog.views.home"))
+	else:
+		context = RequestContext(request, {'user':request.user})
+		return render_to_response('welcome.html',context)	

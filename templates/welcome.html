@@ -1,0 +1,6 @@
+
+{%if user and not user.is_anonymous %}
+      <h3>
+      Hello {{user.get_full_name|default:user.username}} !
+      <h3>
+ {% endif %}
