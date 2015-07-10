@@ -1,0 +1,11 @@
+{% extends 'baseauth.html' %}
+{% block main %}
+<h3>Lets Write a new Blog</h3>
+
+<form method = 'POST' action = "{% url 'blog.views.addblog' %}">
+	{% csrf_token %}
+	Title{{form.title}}<br>
+	Blog{{form.body}}<br>
+	<input type="submit" value = "submit">
+</form>
+{% endblock %}

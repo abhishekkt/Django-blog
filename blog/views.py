@@ -3,10 +3,11 @@ from blog.models import blogger,blog,comment
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from blog.forms import CommentForm,BloggerForm
+from blog.forms import CommentForm,BloggerForm,BlogForm
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 import urllib2
 import json
 
@@ -73,8 +74,18 @@ def register(request,uid):
 	return HttpResponseRedirect(reverse("blog.views.welcome"))	
 
 
+def addblog(request):
+		p = request.POST
+		use = request.user
+		social = use.social_auth.get(provider= 'facebook')
+		blog_by = blogger.objects.get(name = str(social.user))
+		if p.has_key("title") and p["title"] and p.has_key("body") and p["body"]:
+			blog_request = blog(blogger=blog_by,slug=slugify(p["title"]))
+			blog_form = BlogForm(p, instance = blog_request)
+			blog_form.save()
+		return HttpResponseRedirect(reverse("blog.views.welcome"))
+
 def welcome(request):
-	print request
 	if str(request.user) == "AnonymousUser":
 		return HttpResponseRedirect(reverse("blog.views.home"))
 	else:
@@ -86,8 +97,17 @@ def welcome(request):
 			ans = True
 		else:
 			ans = False
-		context = RequestContext(request, {'uid':social.uid,'name':social.user,'form':BloggerForm(),'blogger':blogger,'ans':ans})
+		posts = blog.objects.order_by("-posted_on").filter(blogger = (social.uid))
+		context = RequestContext(request, {'uid':social.uid,'name':social.user,'form':BloggerForm(),'blogger':blogger,'ans':ans,'blog':posts})
 		return render_to_response('welcome.html',context)
+		
+def create(request):
+	c= {'form':BlogForm()}
+	c.update(csrf(request))
+	return render_to_response('create.html',c)
+
+
+
 			
 
 	

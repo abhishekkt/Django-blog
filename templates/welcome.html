@@ -1,8 +1,27 @@
+{% extends 'baseauth.html' %}
+{% block main%}
 
 {%if ans %}
       <h3>
-      Hello {{user.get_full_name|default:user.username}} !
-      <h3>
+      Hello {{user.get_full_name|default:user.username}} !</h3>
+      <a href = "/create/">Create a New Blog</a>
+      <h1>Blog</h1>
+      {% if blog %}
+
+      {% for blog in blog %}
+     <a href="{{ blog.get_absolute_url }}"> <h2><div class="title">{{ blog.title }}</div></h2>
+      <hr>
+      <ul>
+            <div class="time">{{ blog.posted_on }}</div>
+            
+      </ul></a>
+     {% endfor %}
+
+      
+      {% else %}
+            <p>There are no posts.</p>
+      {% endif %}
+      
  {% else %}
  <h3> You need to register in order to write blog </h3>
  <form method = "POST" action = "{%url 'blog.views.register' uid%}">
@@ -12,3 +31,4 @@
  	<input type ="submit" value = "submit">
  </form>
  {% endif %}
+ {%endblock%}

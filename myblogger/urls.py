@@ -25,4 +25,6 @@ urlpatterns = [
     url(r"/add_comment/(\d+)/$","blog.views.add_comment"),  
     url(r'^welcome/$','blog.views.welcome'),
     url(r"/register/(\d+)/$","blog.views.register"),
+    url(r'^create/$','blog.views.create'),
+    url(r"/addblog/$","blog.views.addblog"),
 ]
