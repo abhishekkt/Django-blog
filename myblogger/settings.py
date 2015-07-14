@@ -37,8 +37,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'blog',
     'social.apps.django_app.default',
+    'django_wysiwyg',
+    'ckeditor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -107,5 +110,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 

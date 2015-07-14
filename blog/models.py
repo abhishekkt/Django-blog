@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import permalink
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -13,7 +14,7 @@ class blogger(models.Model):
 class blog(models.Model):
 	title = models.CharField(max_length = 200, unique = True)
 	slug = models.SlugField(max_length = 200, unique = True)
-	body = models.TextField()
+	body = RichTextField()
 	uid = models.AutoField(primary_key = True)
 	posted_on = models.DateField(auto_now_add= True, db_index = True)
 	blogger = models.ForeignKey(blogger)

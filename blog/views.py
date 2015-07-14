@@ -101,9 +101,14 @@ def welcome(request):
 		context = RequestContext(request, {'uid':social.uid,'name':social.user,'form':BloggerForm(),'blogger':blogger,'ans':ans,'blog':posts})
 		return render_to_response('welcome.html',context)
 		
-def create(request):
-	c= {'form':BlogForm()}
-	c.update(csrf(request))
+def create(request,uid):
+	if str(request.user) == "AnonymousUser":
+		return HttpResponseRedirect(reverse("blog.views.home"))
+		print request.user
+	else:
+		name = blogger.objects.get(bid=uid)
+		c= {'form':BlogForm(),'user':name}
+		c.update(csrf(request))
 	return render_to_response('create.html',c)
 
 

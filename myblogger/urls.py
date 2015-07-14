@@ -18,13 +18,14 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-	url(r'^$','blog.views.home'),
+	url(r'^home/','blog.views.home'),
 	url(r'blog/view/(?P<slug>[^\.]+).html','blog.views.view_post',name='view_blog_post'),	
     url('',include('social.apps.django_app.urls',namespace = 'social')),
     url('',include('django.contrib.auth.urls',namespace='auth')),
     url(r"/add_comment/(\d+)/$","blog.views.add_comment"),  
     url(r'^welcome/$','blog.views.welcome'),
     url(r"/register/(\d+)/$","blog.views.register"),
-    url(r'^create/$','blog.views.create'),
+    url(r'/create/(\d+)$','blog.views.create'),
     url(r"/addblog/$","blog.views.addblog"),
+    url(r'^ckeditor/',include('ckeditor.urls')),
 ]

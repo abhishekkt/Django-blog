@@ -2,9 +2,9 @@
 {% block main%}
 
 {%if ans %}
-      <h3>
-      Hello {{user.get_full_name|default:user.username}} !</h3>
-      <a href = "/create/">Create a New Blog</a>
+      
+      <a href = "{%url 'blog.views.create' uid%}">Create a New Blog</a>
+      
       <h1>Blog</h1>
       {% if blog %}
 
