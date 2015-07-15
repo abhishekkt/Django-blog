@@ -105,11 +105,39 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = (os.path.join(BASE_DIR,'static','app_static'))
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static','my_static'),
+    )
+MEDIA_URL ='/media/' 
+MEDIA_ROOT = (os.path.join(BASE_DIR,'static','app_media'))
+
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+DJANGO_WYSIYYG_FLAVOUR = 'ckeditor'
 
+CKEDITOR_JQUERY_URL = '//code.jquery.com/jquery-1.11.1.min.js'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Save','Preview','Templates'],['Cut','Copy','Paste','Undo','Redo'],
+            ['Bold', 'Italic', 'Underline','-','Strike','Subscript','Superscript','-','RemoveFormat'],
+            ['Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe'],
+            ['NumberedList', 'BulletedList', '-','-','Outdent','Indent','-','Blockquote','CreateDiv',
+    '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl'],
+    
+            ['RemoveFormat', 'Source'],
+            ['Find','Replace','SelectAll','-','SpellChecker', 'Scayt'],
+            [ 'Styles','Format','Font','FontSize' ],
+            [ 'TextColor','BGColor' ],
+            [ 'Maximize', 'ShowBlocks' ]
+        ],
+        'height' : 500,
+        'width' : 778,
+         }
+}
