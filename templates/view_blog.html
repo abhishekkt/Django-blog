@@ -1,7 +1,7 @@
 {% extends 'baseauth.html' %}
 {% block main %}
 <h1>{{blog.title }}</h1>
-<p>	{{blog.body|linebreaks}}</p>
+<p>	{{blog.body|safe}}</p>
 
 {% if comments %}
 
@@ -10,7 +10,9 @@
 {% for a in comments %}
 <div class = "comment">
 <div class = "time">{{a.created}}|{{a.author}}</div>
-<div class = "body">{{a.body}}.html</div>
+
+<div class = "body">{{a.body|safe}}</div>
+
 </div> 
 
 {% endfor %}
