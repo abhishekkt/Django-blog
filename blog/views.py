@@ -12,10 +12,7 @@ import urllib2
 import json
 
 
-def index(request):
-	return render_to_response('index.html',{
-		'blog': blog.objects.all()
-		})
+
 
 def view_post(request,slug):
 	blog1 = blog.objects.get(slug = slug)
@@ -75,15 +72,10 @@ def register(request,uid):
 
 
 def addblog(request):
-
 		p = request.POST
 		use = request.user
-		if use == 'ak':
-			Name = use
-		else :
-			social = use.social_auth.get(provider= 'facebook')
-			Name = str(social.user)
-		blog_by = blogger.objects.get(name = Name or 'ak')
+		social = use.social_auth.get(provider= 'facebook')
+		blog_by = blogger.objects.get(name = str(social.user))
 		if p.has_key("title") and p["title"] and p.has_key("body") and p["body"]:
 			blog_request = blog(blogger=blog_by,slug=slugify(p["title"]))
 			blog_form = BlogForm(p, instance = blog_request)
@@ -115,6 +107,9 @@ def create(request,uid):
 		c= {'form':BlogForm(),'user':name}
 		c.update(csrf(request))
 	return render_to_response('create.html',c)
+
+def index(request):
+	return render_to_response('video_bg.html');
 
 
 

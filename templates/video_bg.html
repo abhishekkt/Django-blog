@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'jack.css' %}">
+</head>
+<body>
+<video autoplay poster = "Screenshot from 2015-06-12 06:38:51.png" id="bgvid" >
+	<source src = "{% static 'Anonymous - Freedom of Speech 2014-DKAX-VVMhuQ.webm' %}" type = "video/webm">
+	<source src = "{% static 'Anonymous - Freedom of Speech 2014-DKAX-VVMhuQ.mp4' %}" type="video/mp4">
+</video>
+<div id = "jack">
+	<h1>Freedom of Speech</h1>
+	<p>Our Human Right</p>
+	<p>Freedom of speech is the right to communicate one's opinions and ideas. The term freedom of expression is sometimes used synonymously, but includes any act of seeking, receiving and imparting information or ideas, regardless of the medium used..</p>
+	<a href="{% url 'blog.views.home' %}"><button>Lets Speak</button></a>
+</div>
+</body>
+</html>

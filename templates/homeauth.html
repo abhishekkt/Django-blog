@@ -5,19 +5,22 @@
  
       
       
-      <h1>Blog</h1>
+      
       <div class = "row">
         <div class = "col-md-8">
           <div class = "list-group">
       {% if blog %}
-      
+
       {% for blog in blog %}
-     <a href="{{ blog.get_absolute_url }}"> <h4><div class="title">{{ blog.title }}</div></h4></a>
+     <a href="{{ blog.get_absolute_url }}"> <h2><div class="title">{{ blog.title }}</div></h2>
+      <hr>
+      <ul>
             <div class="time">{{ blog.posted_on }}</div>
-      {% endfor %}
-          </div>
-        </div>
-      </div>
+            
+      </ul></a>
+     {% endfor %}
+
+      
       {% else %}
             <p>There are no posts.</p>
       {% endif %}

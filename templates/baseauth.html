@@ -7,7 +7,7 @@
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>{% block title %}Parts of Speech{% endblock %}</title>
+   <title>{% block title %}Lets Speek{% endblock %}</title>
 
    <!-- Bootstrap -->
    
@@ -25,19 +25,12 @@
     <div id="container">
         <div id="menu">
             {% block nav-global %}
-            <div class = "jumbotron">
-              <h1>Welcome</h1>
-      {%if user and not user.is_anonymous %}
-      <h3>
-      Hello {{user.get_full_name|default:user.username}} 
-      </h3>
-      {% endif %}
-      </div>
+          
       {%if user and not user.is_anonymous %}
       <ul class="nav nav-tabs nav-justified">
       <li><a href = "{%url 'blog.views.home'%}">Home </a></li>
       <li><a href = "/welcome/">My Blogs </a></li>
-      
+  
       <li>
       <a href= "{% url 'auth:logout' %}?next={% url 'blog.views.home' %} ">Logout
       </a>
@@ -55,7 +48,18 @@
       
       {% endif %}
       
-  
+    <div class = "jumbotron">
+              <h1>Welcome</h1>
+      {%if user and not user.is_anonymous %}
+      <h3>
+      Hello {{user.get_full_name|default:user.username}} 
+      </h3>
+      {% block jumbo%}
+      
+      {% endblock %}
+      {% endif %}
+
+      </div>
             {% endblock %}
         </div>
         <div class ="row">
@@ -63,6 +67,7 @@
         <div class= "col-md-10" >
         <div id="content">
             {% block main %}
+
             {% endblock %}
         </div>
     </div>

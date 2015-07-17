@@ -20,6 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$','blog.views.index'),
 	url(r'^home/','blog.views.home'),
 	url(r'blog/view/(?P<slug>[^\.]+).html','blog.views.view_post',name='view_blog_post'),	
     url('',include('social.apps.django_app.urls',namespace = 'social')),

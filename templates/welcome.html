@@ -1,11 +1,16 @@
 {% extends 'baseauth.html' %}
+
+ {% block jumbo %}
+<a href = "{%url 'blog.views.create' uid%}" class = "btn btn-default btn-lg">
+Create a New Blog</a>
+{% endblock %}
 {% block main%}
 
 {%if ans %}
       
-      <a href = "{%url 'blog.views.create' uid%}">Create a New Blog</a>
+     
       
-      <h1>Blog</h1>
+      
       {% if blog %}
 
       {% for blog in blog %}
