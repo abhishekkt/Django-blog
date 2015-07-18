@@ -94,6 +94,7 @@ def welcome(request):
 			ans = True
 		else:
 			ans = False
+		
 		posts = blog.objects.order_by("-posted_on").filter(blogger = (social.uid))
 		context = RequestContext(request, {'uid':social.uid,'name':social.user,'form':BloggerForm(),'blogger':blogger,'ans':ans,'blog':posts})
 		return render_to_response('welcome.html',context)
